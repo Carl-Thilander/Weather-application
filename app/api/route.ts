@@ -7,7 +7,17 @@ export async function GET(req: Request) {
    if (!city) {
     return NextResponse.json({ error: "City required" }, { status: 400 });
   }
-  }
-
   const apiKey = process.env.WEATHER_API_KEY;
+  const res = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+  );
+  const data = await res.json();
+  return NextResponse.json({
+    city: data.name,
+    temp: Math.round(data.main.temp),
+    description: data.weather[0].description,
+  });
+  }
+  
+
   
