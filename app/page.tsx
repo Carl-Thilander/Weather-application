@@ -1,5 +1,5 @@
 import { db } from "@/prisma/db";
-import CityList from "./ui/todo-list";
+import CityList from "./components/city-list";
 
 export default async function Home() {
   const cities = await db.city.findMany();
