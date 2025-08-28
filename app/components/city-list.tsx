@@ -16,7 +16,7 @@ export default function CityList({ defaultCities }: Props) {
   };
 
   return (
-    <div className="grid gap-4">
+    <div className="flex gap-4 flex-wrap justify-center">
       {cities.map((c) => (
         <WeatherCard
           key={c.id}
