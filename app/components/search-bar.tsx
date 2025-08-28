@@ -19,7 +19,7 @@ export default function SearchBar({onSearch}: {onSearch: (city: string) => void}
         className="ml-4 p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
         aria-label="Search for city"
         data-cy="search-button"
-        onClick={() => onSearch(city)}
+        onClick={() => {if (city.trim()) onSearch(city); setCity("")}}
       >
         Search
       </button>

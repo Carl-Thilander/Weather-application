@@ -11,6 +11,9 @@ export async function GET(req: Request) {
   const res = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
   );
+  if (!res.ok) {
+    return NextResponse.json({ error: "City not found" }, { status: 404 });
+  }
   const data = await res.json();
   return NextResponse.json({
     city: data.name,
