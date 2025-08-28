@@ -7,11 +7,7 @@ interface Props {
 }
 
 export default function WeatherCard({name, temp, description, icon,  onDelete}: Props) {
-
-    
     return (
-
-        
         <div
         className="bg-blue-400 p-4 rounded-lg text-white w-64 h-100 border flex items-top flex-col">
             <h2 className="text-2xl font-bold mb-4">{name}</h2>
@@ -28,13 +24,10 @@ export default function WeatherCard({name, temp, description, icon,  onDelete}: 
             <button
             onClick={onDelete}
             className="text-white-500 p-2 bg-red-500 rounded-xl mt-auto hover:text-red-700"
-            aria-label={`Ta bort ${name}`}
+            aria-label={`Remove ${name} from list`}
             >
           Remove City
         </button>
-            
-        
-        
     )}
     </div>
     )

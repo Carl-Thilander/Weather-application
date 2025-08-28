@@ -26,7 +26,7 @@ export async function seedDefaultCities() {
     },
     {
       id: "68adb30b0c2c50f13d0a64e6",
-      temp: 18,
+      temp: 15,
       name: "Stockholm",
       description: "Cloudy",
       icon: "03d",
