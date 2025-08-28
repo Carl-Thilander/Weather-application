@@ -2,6 +2,7 @@
 
 import { City } from "@/generated/prisma";
 import { useState } from "react";
+import WeatherCard from "./weather-card";
 
 interface Props {
   defaultCities: City[];
@@ -10,18 +11,24 @@ interface Props {
 export default function CityList({ defaultCities }: Props) {
   const [cities, setCities] = useState(defaultCities);
 
+  const handleDelete = (id: string) => {
+    setCities(cities.filter((c) => c.id !== id));
+  };
+
   return (
-    <ul>
+    <div className="grid gap-4">
       {cities.map((c) => (
-        <li key={c.id}>
-          <span className="text-black">{c.name}</span>
-          <button
-            onClick={() => setCities(cities.filter(({ id }) => c.id !== id))}
-          >
-            🗑️
-          </button>
-        </li>
+        <WeatherCard
+          key={c.id}
+          name={c.name}
+          temp={c.temp}
+          description={c.description}
+          onDelete={() => handleDelete(c.id)}
+        />
+        
+         
+       
       ))}
-    </ul>
+    </div>
   );
 }
