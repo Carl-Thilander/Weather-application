@@ -15,8 +15,9 @@ datasource db {
 }
 
 model City {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   temp        Int
   description String
+  icon        String?
 }

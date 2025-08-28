@@ -20,7 +20,7 @@ export default function CityList({ defaultCities }: Props) {
     const data = await res.json();
     setCities((prev) => [
       ...prev,
-      { id: data.city, name: data.city, temp: data.temp, description: data.description }
+      { id: data.city, name: data.city, temp: data.temp,icon: data.icon, description: data.description,  },
     ]);
   };
 
@@ -37,6 +37,7 @@ export default function CityList({ defaultCities }: Props) {
           name={c.name}
           temp={c.temp}
           description={c.description}
+          icon={c.icon || ""}
           onDelete={() => handleDelete(c.id)}
         />
         

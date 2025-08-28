@@ -15,10 +15,12 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "City not found" }, { status: 404 });
   }
   const data = await res.json();
+  const weather = data.weather[0];
   return NextResponse.json({
     city: data.name,
     temp: Math.round(data.main.temp),
     description: data.weather[0].description,
+    icon: weather.icon,
   });
   }
   

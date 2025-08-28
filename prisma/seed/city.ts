@@ -8,24 +8,28 @@ export async function seedDefaultCities() {
       temp: 20,
       name: "New York",
       description: "Cloudy",
+      icon: "01d",
     },
     {
       id: "68adb30b0c2c50f13d0a64e8",
       temp: 30,
       name: "Osthammar",
       description: "Sunny",
+      icon: "10d",
     },
     {
       id: "68adb30b0c2c50f13d0a64e7",
       temp: 2,
       name: "Rejkjavik",
       description: "Snowy",
+      icon: "50d",
     },
     {
       id: "68adb30b0c2c50f13d0a64e6",
       temp: 18,
       name: "Stockholm",
       description: "Cloudy",
+      icon: "03d",
     },
   ];
 
