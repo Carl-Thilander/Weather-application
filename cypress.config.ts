@@ -1,6 +1,6 @@
 import { defineConfig } from "cypress";
 import { db } from "./prisma/db";
-import { seedTodos } from "./prisma/seed/todo";
+import { seedDefaultCities } from "./prisma/seed/city";
 
 export default defineConfig({
   e2e: {
@@ -8,8 +8,8 @@ export default defineConfig({
       // implement node event listeners here
       on("task", {
         async reseed() {
-          await db.todo.deleteMany();
-          await seedTodos();
+          await db.city.deleteMany();
+          await seedDefaultCities();
 
           return null;
         },

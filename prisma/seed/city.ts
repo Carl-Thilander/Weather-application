@@ -12,7 +12,7 @@ export async function seedDefaultCities() {
     {
       id: "68adb30b0c2c50f13d0a64e8",
       temp: 30,
-      name: "Ban Phee",
+      name: "Osthammar",
       description: "Sunny",
     },
     {

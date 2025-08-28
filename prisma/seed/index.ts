@@ -1,5 +1,5 @@
 import { db } from "../db";
-import { seedDefaultCities } from "./todo";
+import { seedDefaultCities } from "./city";
 
 async function main() {
   await seedDefaultCities();
