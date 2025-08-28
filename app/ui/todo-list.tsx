@@ -1,22 +1,22 @@
 "use client";
 
-import { Todo } from "@/generated/prisma";
+import { City } from "@/generated/prisma";
 import { useState } from "react";
 
 interface Props {
-  defaultTodos: Todo[];
+  defaultCities: City[];
 }
 
-export default function TodoList({ defaultTodos }: Props) {
-  const [todos, setTodos] = useState(defaultTodos);
+export default function CityList({ defaultCities }: Props) {
+  const [cities, setCities] = useState(defaultCities);
 
   return (
     <ul>
-      {todos.map((t) => (
-        <li key={t.id}>
-          <span>{t.text}</span>
+      {cities.map((c) => (
+        <li key={c.id}>
+          <span className="text-black">{c.name}</span>
           <button
-            onClick={() => setTodos(todos.filter(({ id }) => t.id !== id))}
+            onClick={() => setCities(cities.filter(({ id }) => c.id !== id))}
           >
             🗑️
           </button>

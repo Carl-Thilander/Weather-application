@@ -1,12 +1,12 @@
 import { db } from "@/prisma/db";
-import TodoList from "./ui/todo-list";
+import CityList from "./ui/todo-list";
 
 export default async function Home() {
-  const todos = await db.todo.findMany();
+  const cities = await db.city.findMany();
 
   return (
-    <main>
-      <TodoList defaultTodos={todos} />
+    <main className="bg-slate-200 min-h-screen p-8">
+      <CityList defaultCities={cities} />
     </main>
   );
 }
