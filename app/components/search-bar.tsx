@@ -8,7 +8,7 @@ export default function SearchBar({onSearch}: {onSearch: (city: string) => void}
   return (
     <div className="mb-8">
       <input
-      data-cy="search-city"
+        data-cy="Enter-city"
         type="text"
         value={city}
         placeholder="Search for a city..."
@@ -18,7 +18,7 @@ export default function SearchBar({onSearch}: {onSearch: (city: string) => void}
       <button
         className="ml-4 p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
         aria-label="Search for city"
-        data-cy="search-button"
+        data-cy="Search-city"
         onClick={() => {if (city.trim()) onSearch(city); setCity("")}}
       >
         Search
