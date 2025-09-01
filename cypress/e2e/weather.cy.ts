@@ -1,17 +1,17 @@
 describe("weather app", () => {
     beforeEach(() => {
-      cy.visit("http://localhost:3000");
       cy.task("reseed");
     });
   
     it("should display the weather for a default city", () => {
-      
+      cy.visit("/");
       cy.get("h2").should("contain.text", "New York");
       cy.get('[data-cy="temperature"]').should("contain.text", "20°C");
       cy.get('[data-cy="condition"]').should("contain.text", "Cloudy");
     });
   
     it("should be able to search for a different city", () => {
+      cy.visit("/");
       cy.get("[data-cy='Enter-city']").type("Kuala Lumpur");
       cy.get("[data-cy='Search-city']").click();
       cy.get("h2").should("contain.text", "Kuala Lumpur");
@@ -19,6 +19,7 @@ describe("weather app", () => {
     });
 
     it("should be possible to remove a city", () => {
+      cy.visit("/");
       cy.get("[data-cy='Enter-city']").type("Gothenburg");
       cy.get("[data-cy='Search-city']").click();
       cy.get("h2").should("contain.text", "Gothenburg");
@@ -28,6 +29,7 @@ describe("weather app", () => {
     });
 
     it("should be possible to search and get extended info on a city", () => {
+      cy.visit("/");
       cy.intercept('GET', '/api/weather?city=London', {
         statusCode: 200,
         body: {
