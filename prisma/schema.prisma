@@ -20,4 +20,5 @@ model City {
   temp        Int
   description String
   icon        String?
+  favorite    Boolean @default(false)
 }

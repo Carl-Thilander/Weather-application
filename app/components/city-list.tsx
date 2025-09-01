@@ -20,7 +20,7 @@ export default function CityList({ defaultCities }: Props) {
     const data = await res.json();
     setCities((prev) => [
       ...prev,
-      { id: data.city, name: data.city, temp: data.temp,icon: data.icon, description: data.description,  },
+      { id: data.city, name: data.city, temp: data.temp,icon: data.icon, description: data.description, favorite: false },
     ]);
   };
 

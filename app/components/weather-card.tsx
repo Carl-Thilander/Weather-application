@@ -4,13 +4,17 @@ interface Props {
     description: string;
     icon: string;
     onDelete?: () => void;
+    onToggleFavorite?: () => void;
 }
 
-export default function WeatherCard({name, temp, description, icon,  onDelete}: Props) {
+export default function WeatherCard({name, temp, description, icon,  onDelete, onToggleFavorite}: Props) {
     return (
         <div
         className="bg-blue-400 p-4 rounded-lg text-white w-64 h-100 border flex items-top flex-col">
+          <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold mb-4">{name}</h2>
+            <button onClick={onToggleFavorite}>⭐</button>
+          </div>
             {icon && (
           <img
             src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
