@@ -7,7 +7,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "test": "cypress open",
+    "test": "cypress open --e2e -b chrome",
     "generate": "prisma generate",
     "push": "prisma db push",
     "studio": "prisma studio",
