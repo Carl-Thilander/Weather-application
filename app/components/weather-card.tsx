@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 interface Props {
     name: string;
@@ -10,6 +9,7 @@ interface Props {
 }
 
 export default function WeatherCard({name, temp, description, icon,  onDelete, onToggleFavorite}: Props) {
+  
     return (
         <div
         className="bg-blue-400 p-4 rounded-lg text-white w-64 h-100 border flex items-top flex-col">
@@ -22,6 +22,7 @@ export default function WeatherCard({name, temp, description, icon,  onDelete, o
             src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
             alt={description}
             className="w-16 h-16"
+            loading="lazy"
           />
         )}
             <p className="text-lg mb-4" data-cy="temperature">Temperature: {temp}°C</p>

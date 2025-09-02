@@ -9,6 +9,7 @@ export async function seedDefaultCities() {
       name: "New York",
       description: "Cloudy",
       icon: "01d",
+      favorite: false
     },
     {
       id: "68adb30b0c2c50f13d0a64e8",
@@ -16,6 +17,7 @@ export async function seedDefaultCities() {
       name: "Osthammar",
       description: "Sunny",
       icon: "10d",
+      favorite: false
     },
     {
       id: "68adb30b0c2c50f13d0a64e7",
@@ -23,6 +25,7 @@ export async function seedDefaultCities() {
       name: "Rejkjavik",
       description: "Snowy",
       icon: "50d",
+      favorite: false
     },
     {
       id: "68adb30b0c2c50f13d0a64e6",
@@ -30,6 +33,7 @@ export async function seedDefaultCities() {
       name: "Stockholm",
       description: "Cloudy",
       icon: "03d",
+      favorite: false
     },
   ];
 
