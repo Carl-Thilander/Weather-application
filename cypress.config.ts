@@ -1,4 +1,4 @@
-import { spawn } from "child_process";
+import { spawn } from "cross-spawn";
 import { defineConfig } from "cypress";
 import { MongoMemoryReplSet } from "mongodb-memory-server";
 import waitOn from "wait-on";
