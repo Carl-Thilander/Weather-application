@@ -8,7 +8,7 @@ export default async function Home() {
 
 
   return (
-    <main className="bg-gray-100 min-h-screen p-8">
+    <main className="bg-slate-700 min-h-screen p-8">
       <Header />
       <CityList defaultCities={defaultCities} />
     </main>

@@ -13,7 +13,7 @@ export default function SearchBar({onSearch}: {onSearch: (city: string) => void}
         value={city}
         placeholder="Search for a city..."
         onChange={(e) => setCity(e.target.value)}
-        className="w-100 p-4 rounded-lg border-3 text-slate-800 focus:ring-blue-500"
+        className="w-100 p-4 rounded-lg border-3 bg-emerald-700 text-slate-800 focus:ring-blue-500"
       />
       <button
         className="ml-4 p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600"

@@ -21,13 +21,13 @@ export default async function cityPage({params}: Props){
     }
 
     return (
-           <div className="flex flex-col items-center mt-8">
-            <Link href={"/"} className="p-4 bg-blue-500 rounded-2xl">Back to homepage</Link>
+           <main className="flex flex-col items-center bg-amber-500 h-[100vh]">
+            <Link href={"/"} className="p-4 bg-blue-500 rounded-2xl mt-4">Back to homepage</Link>
       <h1 className="text-3xl font-bold mb-4">{weather.city}</h1>
       <p className="text-xl">{weather.temp}°C</p>
       <p>{weather.description}</p>
       <img src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt="weather icon" />
-    </div>
+    </main>
     )
 
 }
