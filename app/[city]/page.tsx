@@ -33,13 +33,8 @@ export default async function CityPage({ params }: Props) {
 
   const { days, hours, dayKeys } = forecast ? groupForecastByDayAndHour(forecast) : { days: {}, hours: [], dayKeys: [] };
 
-
-  
-
-  
-
   return (
-    <main className="bg-gradient-to-b from-slate-800 to-slate-600 min-h-screen p-8">
+    <main className="bg-gradient-to-b from-slate-800 to-slate-600 min-h-screen p-8 ">
       <h1 className="text-3xl font-bold">{weather.name}</h1>
       <p className="text-xl" data-cy="temperature">{weather.temp}°C</p>
       <p className="capitalize" data-cy="condition">{weather.description}</p>
@@ -49,7 +44,7 @@ export default async function CityPage({ params }: Props) {
 
       <h2 className="mt-8 text-2xl font-semibold text-white">Weather Forecast</h2>
 
- <div className="mt-6 grid grid-cols-1 md:grid-cols-5 gap-6" data-cy="forecast-grid">
+ <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 " data-cy="forecast-grid">
       {dayKeys.map((day) => (
         <div
           key={day}
@@ -69,7 +64,7 @@ export default async function CityPage({ params }: Props) {
                   key={day + hour}
                   className="flex flex-col items-center justify-center p-3 rounded-xl bg-gradient-to-b from-sky-100 to-sky-300 shadow"
                 >
-                  <span className="text-sm font-semibold text-slate-700">
+                  <span className="text-sm font-bold text-slate-700">
                     {hour}
                   </span>
                   <img
@@ -78,10 +73,10 @@ export default async function CityPage({ params }: Props) {
                     width={48}
                     height={48}
                   />
-                  <span className="text-lg font-bold">{item.temp}°C</span>
-                  <span className="text-lg font-bold">{item.wind} m/s</span>
-                  <span className="text-lg font-bold">{item.humidity} %</span>
-                  <span className="text-xs text-slate-600">
+                  <span className="text-lg font-bold text-black">{item.temp}°C</span>
+                  <span className="text-lg font-bold text-black">Wind {item.wind} m/s</span>
+                  <span className="text-lg font-bold text-black">Humidity {item.humidity} %</span>
+                  <span className="text-s text-slate-600 capitalize">
                     {item.description}
                   </span>
                 </div>
