@@ -49,7 +49,7 @@ export default async function CityPage({ params }: Props) {
 
       <h2 className="mt-8 text-2xl font-semibold text-white">Weather Forecast</h2>
 
- <div className="mt-6 grid grid-cols-1 md:grid-cols-5 gap-6">
+ <div className="mt-6 grid grid-cols-1 md:grid-cols-5 gap-6" data-cy="forecast-grid">
       {dayKeys.map((day) => (
         <div
           key={day}
@@ -79,6 +79,8 @@ export default async function CityPage({ params }: Props) {
                     height={48}
                   />
                   <span className="text-lg font-bold">{item.temp}°C</span>
+                  <span className="text-lg font-bold">{item.wind} m/s</span>
+                  <span className="text-lg font-bold">{item.humidity} %</span>
                   <span className="text-xs text-slate-600">
                     {item.description}
                   </span>

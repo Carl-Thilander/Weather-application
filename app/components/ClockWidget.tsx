@@ -19,7 +19,7 @@ export default function ClockWidget() {
         return () => clearInterval(interval);
     }, []);
     return (
-    <div className="text-4xl font-mono font-bold text-slate-800">
+    <div className="text-4xl font-mono font-bold text-slate-800" data-cy="clock-widget">
       {time}
     </div>
   );

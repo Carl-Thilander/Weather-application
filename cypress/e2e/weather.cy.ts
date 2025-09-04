@@ -41,13 +41,17 @@ describe("weather app", () => {
       cy.url().should('include', '/stockholm');
       cy.get('h1').should('contain.text', 'Stockholm');
       cy.get("h2").should("contain.text", "Weather Forecast");
-      cy.get("div").should("contain.text", "Wind:");
-      cy.get("div").should("contain.text", "Humidity:");
+      cy.get("[data-cy='forecast-grid']").first().should("contain.text", "m/s");
+      cy.get("[data-cy='forecast-grid']").first().should("contain.text", "%");
     });
-      
 
-    
-
+    it("should display clock and update mocked time", () => {
+      const mockDate = new Date(2024, 0, 1, 12, 0, 0);
+      const timeStamp = mockDate.getTime();
+      cy.clock(timeStamp);
+      cy.visit("/");
+      cy.get("[data-cy='clock-widget']").contains("12:00").should("exist");
+    });
 });
 
 
