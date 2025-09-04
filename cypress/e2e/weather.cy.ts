@@ -13,16 +13,17 @@ describe("weather app", () => {
     it("should be able to search for a different city", () => {
       cy.visit("/");
       cy.get("[data-cy='Enter-city']").type("Kuala Lumpur");
-      cy.get("[data-cy='Search-city']").click();
-      cy.get("h2").should("contain.text", "Kuala Lumpur");
-      
+      cy.get("[data-cy='Search-city']").first().click();
+      cy.get("h1").should("contain.text", "Kuala Lumpur");
     });
 
     it("should be possible to remove a city", () => {
       cy.visit("/");
       cy.get("[data-cy='Enter-city']").type("Gothenburg");
-      cy.get("[data-cy='Search-city']").click();
-      cy.get("h2").should("contain.text", "Gothenburg");
+      cy.get("[data-cy='Search-city']").first().click();
+      cy.get("h1").should("contain.text", "Gothenburg");
+      cy.get("[data-cy='Add-favorite']").click();
+      cy.get
 
       cy.get("button[aria-label='Remove Gothenburg from list']").click();
       cy.get("h2").should("not.contain.text", "Gothenburg");
@@ -46,6 +47,13 @@ describe("weather app", () => {
       cy.get('[data-cy="condition"]').should("contain.text", "Rainy");
     }
     );
+
+    it("should display forecast info on city page", () => {
+      cy.visit("/london");
+      cy.get("h2").should("contain.text", "Weather Forecast");
+      cy.get("div").should("contain.text", "Wind:");
+      cy.get("div").should("contain.text", "Humidity:");
+    });
 
 });
 

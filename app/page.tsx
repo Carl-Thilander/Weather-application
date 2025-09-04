@@ -1,6 +1,6 @@
 
 import { db } from "@/prisma/db";
-import CityList from "./components/city-list";
+import CityList from "./components/CityList";
 import Header from "./components/header";
 
 export default async function Home() {
