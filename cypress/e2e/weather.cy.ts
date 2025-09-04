@@ -23,9 +23,10 @@ describe("weather app", () => {
       cy.get("[data-cy='Search-city']").first().click();
       cy.get("h1").should("contain.text", "Gothenburg");
       cy.get("[data-cy='Add-favorite']").click();
-      cy.get
+      cy.get("[data-cy='Back-to-home']").click();
+      cy.get("h2").should("contain.text", "Gothenburg");
 
-      cy.get("button[aria-label='Remove Gothenburg from list']").click();
+      cy.get("[data-cy='Remove-city']").click();
       cy.get("h2").should("not.contain.text", "Gothenburg");
     });
 

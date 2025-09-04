@@ -4,10 +4,9 @@ interface Props {
     temp: number;
     description: string;
     icon: string;
-    onDelete?: () => void;
 }
 
-export default function WeatherCard({name, temp, description, icon,  onDelete}: Props) {
+export default function WeatherCard({name, temp, description, icon}: Props) {
   
     return (
         <div
@@ -25,15 +24,7 @@ export default function WeatherCard({name, temp, description, icon,  onDelete}: 
         )}
             <p className="text-lg mb-4" data-cy="temperature">Temperature: {temp}°C</p>
             <p className="text-lg mb-4 capitalize" data-cy="condition">Condition: {description}</p>
-        {onDelete && (
-            <button
-            onClick={onDelete}
-            className="text-white-500 p-2 bg-red-500 rounded-xl mt-auto hover:text-red-700"
-            aria-label={`Remove ${name} from list`}
-            >
-          Remove City
-        </button>
-    )}
+        
     </div>
     )
     }
