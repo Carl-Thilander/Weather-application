@@ -3,7 +3,25 @@
 import { db } from "@/prisma/db";
 import { revalidatePath } from "next/cache";
 
-//Specefic data for a city
+//Fetch 5-day forecast for a city
+export async function fetchForecast(city: string) {
+  const apiKey = process.env.WEATHER_API_KEY;
+  const res = await fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
+  );
+  if (!res.ok) return null;
+  const data = await res.json();
+  // Return array of forecasts (every 3 hours)
+  return data.list.map((item: any) => ({
+    dt: item.dt,
+    date: new Date(item.dt * 1000),
+    temp: Math.round(item.main.temp),
+    description: item.weather[0].description,
+    icon: item.weather[0].icon,
+    humidity: item.main.humidity,
+    wind: item.wind.speed,
+  }));
+}
 export async function fetchWeather(city: string) {
   const apiKey = process.env.WEATHER_API_KEY;
   const res = await fetch(
@@ -73,7 +91,7 @@ export async function saveFavorite(city: {
   // Check if city already exists by weatherId
   const exists = await db.city.findFirst({ where: { weatherId: city.id } });
   if (exists) return;
-  
+
   //Usage of fake id
   const objectId = fakeObjectIdFromWeatherId(city.id);
 
