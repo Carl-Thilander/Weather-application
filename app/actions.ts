@@ -74,11 +74,7 @@ export async function fetchCities(query: string) {
   }));
 }
 
-//Function to convert api id to mongodb id
-function fakeObjectIdFromWeatherId(weatherId: string | number): string {
-  const hex = weatherId.toString(16);
-  return hex.padStart(24, '0');
-}
+
 
 //Save city to database when added to favourites
 export async function saveFavorite(city: {
@@ -92,12 +88,9 @@ export async function saveFavorite(city: {
   const exists = await db.city.findFirst({ where: { weatherId: city.id } });
   if (exists) return;
 
-  //Usage of fake id
-  const objectId = fakeObjectIdFromWeatherId(city.id);
 
   await db.city.create({
     data: {
-      id: objectId,
       weatherId: city.id,
       name: city.name,
       temp: city.temp,

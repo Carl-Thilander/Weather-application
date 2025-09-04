@@ -16,7 +16,7 @@ export async function seedDefaultCities() {
       id: "68adb30b0c2c50f13d0a64e8",
       weatherId: "68adb30b0c2c50f13d0a64e8",
       temp: 30,
-      name: "Osthammar",
+      name: "Östhammar",
       description: "Sunny",
       icon: "10d",
       favorite: false
@@ -25,7 +25,7 @@ export async function seedDefaultCities() {
       id: "68adb30b0c2c50f13d0a64e7",
       weatherId: "68adb30b0c2c50f13d0a64e7",
       temp: 2,
-      name: "Rejkjavik",
+      name: "Reykjavik",
       description: "Snowy",
       icon: "50d",
       favorite: false

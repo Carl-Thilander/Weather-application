@@ -39,7 +39,7 @@ export default function CityList({ defaultCities }: Props) {
         {cities.map((c) => (
           <div key={c.id} className="relative">
             {/* 👇 Link runt hela WeatherCard */}
-            <Link href={`/${c.name.toLowerCase()}`} className="block">
+            <Link href={`/${c.name.toLowerCase()}`} className="block hover:scale-105 transform transition duration-200">
               <WeatherCard
                 name={c.name}
                 temp={c.temp}
@@ -47,15 +47,15 @@ export default function CityList({ defaultCities }: Props) {
                 icon={c.icon || ""}
               />
             </Link>
-
-            
             <button
               onClick={() => handleDelete(c.id)}
-              className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded"
-              data-cy="Remove-city"
+              className="absolute top-2 right-2 bg-gray-300 p-2 rounded-full hover:bg-red-600 transition"
+              aria-label={`Remove ${c.name} from list`}
             >
               ❌
             </button>
+
+            
           </div>
         ))}
       </div>

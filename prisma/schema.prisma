@@ -15,7 +15,7 @@ datasource db {
 }
 
 model City {
-  id          String  @id @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   weatherId   String
   name        String
   temp        Int
