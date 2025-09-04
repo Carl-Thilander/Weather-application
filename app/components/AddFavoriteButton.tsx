@@ -11,17 +11,21 @@ interface Props {
     description: string;
     icon: string | null;
   };
+  isFavorite: boolean;
 }
 
-export default function AddFavoriteButton({ city }: Props) {
+export default function AddFavoriteButton({ city, isFavorite }: Props) {
   const [isPending, startTransition] = useTransition();
   const [showMessage, setShowMessage] = React.useState(false);
+  const [localFavorite, setLocalFavorite] = React.useState(isFavorite);
 
   const handleClick = () => {
+    if (localFavorite) return;
     startTransition(async () => {
       await saveFavorite(city);
+      setLocalFavorite(true);
       setShowMessage(true);
-      setTimeout(() => setShowMessage(false), 2000); 
+      setTimeout(() => setShowMessage(false), 2000);
     });
   };
 
@@ -29,11 +33,17 @@ export default function AddFavoriteButton({ city }: Props) {
     <div>
       <button
         onClick={handleClick}
-        disabled={isPending}
-        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+        disabled={isPending || localFavorite}
+        className={`mt-4 bg-blue-500 text-white px-4 py-2 rounded transition ${
+          localFavorite ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600"
+        }`}
         data-cy="Add-favorite"
       >
-        {isPending ? "Adding..." : "Add to favorites"}
+        {localFavorite
+          ? "Already in favorites"
+          : isPending
+          ? "Adding..."
+          : "Add to favorites"}
       </button>
       {showMessage && (
         <div className="mt-2 text-green-600 bg-green-100 px-3 py-2 rounded shadow w-100">

@@ -33,13 +33,16 @@ export async function fetchWeather(city: string) {
   const data = await res.json();
   const weather = data.weather[0];
 
+  // Check if city is in favorites
+  const favoriteCity = await db.city.findFirst({ where: { weatherId: data.id.toString() } });
+
   return {
     id: data.id.toString(),
     name: data.name,
     temp: Math.round(data.main.temp),
     description: weather.description,
     icon: weather.icon,
-    favorite: false,
+    favorite: !!favoriteCity,
     extra: data, 
   };
 }

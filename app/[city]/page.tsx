@@ -19,7 +19,7 @@ export default async function CityPage({ params }: Props) {
       <p className="text-xl" data-cy="temperature">{weather.temp}°C</p>
       <p className="capitalize" data-cy="condition">{weather.description}</p>
 
-      <AddFavoriteButton city={weather}  />
+      <AddFavoriteButton city={weather} isFavorite={weather.favorite}  />
       <BackToHomeButton />
 
       <h2 className="mt-8 text-2xl font-semibold text-blue-900">Weather Forecast</h2>
