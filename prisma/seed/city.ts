@@ -5,6 +5,7 @@ export async function seedDefaultCities() {
   const mockedCities: City[] = [
     {
       id: "68adb30b0c2c50f13d0a64e9",
+      weatherId: "68adb30b0c2c50f13d0a64e9",
       temp: 20,
       name: "New York",
       description: "Cloudy",
@@ -13,6 +14,7 @@ export async function seedDefaultCities() {
     },
     {
       id: "68adb30b0c2c50f13d0a64e8",
+      weatherId: "68adb30b0c2c50f13d0a64e8",
       temp: 30,
       name: "Osthammar",
       description: "Sunny",
@@ -21,6 +23,7 @@ export async function seedDefaultCities() {
     },
     {
       id: "68adb30b0c2c50f13d0a64e7",
+      weatherId: "68adb30b0c2c50f13d0a64e7",
       temp: 2,
       name: "Rejkjavik",
       description: "Snowy",
@@ -29,6 +32,7 @@ export async function seedDefaultCities() {
     },
     {
       id: "68adb30b0c2c50f13d0a64e6",
+      weatherId: "68adb30b0c2c50f13d0a64e6",
       temp: 15,
       name: "Stockholm",
       description: "Cloudy",

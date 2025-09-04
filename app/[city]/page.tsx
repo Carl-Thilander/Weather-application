@@ -1,33 +1,25 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import { fetchWeather } from "@/app/actions";
+import BackToHomeButton from "@/app/components/BacktoHomeBtn";
+import AddFavoriteButton from "../components/AddFavoriteButton";
 
 interface Props {
-    params: {
-        city: string;
-    };
+  params: { city: string };
 }
 
-async function getCityWeather(city: string) {
-  const res = await fetch(`http://localhost:3000/api/weather?city=${city}`);
-  if (!res.ok) return null;
-  return res.json();
-}
+export default async function CityPage({ params }: Props) {
+  const weather = await fetchWeather(params.city);
 
-export default async function cityPage({params}: Props){
-    const weather = await getCityWeather(params.city);
+  if (!weather) return <p>Ingen data hittades för {params.city}</p>;
 
-    if (!weather){
-        return notFound();
-    }
-
-    return (
-           <main className="flex flex-col items-center bg-amber-500 h-[100vh]">
-            <Link href={"/"} className="p-4 bg-blue-500 rounded-2xl mt-4">Back to homepage</Link>
-      <h1 className="text-3xl font-bold mb-4">{weather.city}</h1>
+  return (
+    <div className="p-6">
+      <h1 className="text-3xl font-bold">{weather.name}</h1>
       <p className="text-xl">{weather.temp}°C</p>
-      <p>{weather.description}</p>
-      <img src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt="weather icon" />
-    </main>
-    )
+      <p className="capitalize">{weather.description}</p>
 
+        <AddFavoriteButton city={weather} />
+
+      <BackToHomeButton />
+    </div>
+  );
 }

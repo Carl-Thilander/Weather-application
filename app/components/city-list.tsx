@@ -1,10 +1,19 @@
 "use client";
 
-import { City } from "@/generated/prisma";
-import { useRouter } from "next/navigation";
+import { deleteFavorite } from "@/app/actions"; // 👈 ny action
+import Link from "next/link";
 import { useState } from "react";
 import SearchBar from "./search-bar";
 import WeatherCard from "./weather-card";
+
+interface City {
+  id: string;
+  name: string;
+  temp: number;
+  description: string;
+  icon: string | null;
+  favorite: boolean;
+}
 
 interface Props {
   defaultCities: City[];
@@ -12,56 +21,41 @@ interface Props {
 
 export default function CityList({ defaultCities }: Props) {
   const [cities, setCities] = useState(defaultCities);
-  const router = useRouter();
 
-  const handleSearch = async (city: string) => {
-    const res = await fetch(`/api/weather?city=${city}`);
-    if (!res.ok) {
-      alert("Kunde inte hitta stad");
-      return;
-    }
-    router.push(`/${city.toLowerCase()}`);
-    const data = await res.json();
-    setCities((prev) => [
-      ...prev,
-      { id: data.city, name: data.city, temp: data.temp,icon: data.icon, description: data.description, favorite: false },
-    ]);
+  const handleSearch = (city: string) => {
+    window.location.href = (`/${city.toLowerCase()}`);
   };
 
-
-
-  const handleDelete = (id: string) => {
-    setCities(cities.filter((c) => c.id !== id));
-  };
-
-   const handleFavorite = async (city: { name: string; id: string; temp: number; description: string; icon: string | null; favorite: boolean; }) => {
-    const res = await fetch('/api/weather', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(city),
-    });
-
-    if (!res.ok) {
-      alert('Kunde inte spara som favorit');
-    }
+  const handleDelete = async (id: string) => {
+    await deleteFavorite(id);
+    setCities((prev) => prev.filter((c) => c.id !== id));
   };
 
   return (
-    <div className="flex flex-wrap flex-col items-center">
-      <SearchBar  onSearch={handleSearch}/>
-      <div className="flex flex-row gap-4 flex-wrap justify-center">
-      {cities.map((c) => (
-  <WeatherCard
-    key={c.id}
-    name={c.name}
-    temp={c.temp}
-    description={c.description}
-    icon={c.icon || ""}
-    onDelete={() => handleDelete(c.id)}
-    onToggleFavorite={() => handleFavorite(c)}
-  />
-))}
+     <div className="flex flex-col items-center">
+      <SearchBar onSearch={handleSearch} />
+      <div className="flex flex-row gap-4 flex-wrap justify-center mt-6">
+        {cities.map((c) => (
+          <div key={c.id} className="relative">
+            {/* 👇 Link runt hela WeatherCard */}
+            <Link href={`/${c.name.toLowerCase()}`} className="block">
+              <WeatherCard
+                name={c.name}
+                temp={c.temp}
+                description={c.description}
+                icon={c.icon || ""}
+              />
+            </Link>
 
+            
+            <button
+              onClick={() => handleDelete(c.id)}
+              className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded"
+            >
+              ❌
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

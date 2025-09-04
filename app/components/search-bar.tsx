@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 interface City {
   name: string;
   country: string;
-  lat: number;
-  lon: number;
 }
 
 interface SearchBarProps {
@@ -17,26 +15,25 @@ interface SearchBarProps {
 export default function SearchBar({ onSearch }: SearchBarProps) {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<City[]>([]);
+ 
 
-  useEffect(() => {
+   useEffect(() => {
     const getSuggestions = async () => {
-      if (query.length < 2) {
-        setSuggestions([]);
-        return;
-      }
-      const cities = await fetchCities(query);
-      setSuggestions(cities);
+      if (query.length < 2) return setSuggestions([]);
+      const results = await fetchCities(query);
+      setSuggestions(results);
     };
-
-    const timeout = setTimeout(getSuggestions, 300); // debounce
+    const timeout = setTimeout(getSuggestions, 300);
     return () => clearTimeout(timeout);
   }, [query]);
 
-  const handleSelect = (city: City) => {
+
+    const handleSelect = (city: City) => {
     setQuery(city.name);
     setSuggestions([]);
-    onSearch(city.name);
+    onSearch(city.name); 
   };
+  
 
   return (
     <div className="relative w-full max-w-md">
@@ -44,7 +41,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Sök stad..."
+        placeholder="Search city..."
         className="w-full border p-2 rounded"
       />
       {suggestions.length > 0 && (
@@ -53,7 +50,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
             <li
               key={`${city.name}-${idx}`}
               className="p-2 hover:bg-gray-100 cursor-pointer"
-              onClick={() => handleSelect(city)}
+             onClick={() => handleSelect(city)}
             >
               {city.name}, {city.country}
             </li>

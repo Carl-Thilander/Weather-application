@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/prisma/db";
+import { revalidatePath } from "next/cache";
 
 //Specefic data for a city
 export async function fetchWeather(city: string) {
@@ -25,8 +26,20 @@ export async function fetchWeather(city: string) {
   };
 }
 
+//Delete city from favourites
+export async function deleteFavorite(id: string) {
+  try {
+    await db.city.delete({ where: { id } });
+    revalidatePath("/"); // uppdatera homepage
+  } catch (error) {
+    console.error(error);
+    return { error: "Kunde inte ta bort stad" };
+  }
+}
+
 //Data for searching cities
 export async function fetchCities(query: string) {
+   if (!query) return [];
   const apiKey = process.env.WEATHER_API_KEY;
   const res = await fetch(
     `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`
@@ -43,6 +56,12 @@ export async function fetchCities(query: string) {
   }));
 }
 
+//Function to convert api id to mongodb id
+function fakeObjectIdFromWeatherId(weatherId: string | number): string {
+  const hex = weatherId.toString(16);
+  return hex.padStart(24, '0');
+}
+
 //Save city to database when added to favourites
 export async function saveFavorite(city: {
   id: string;
@@ -51,12 +70,17 @@ export async function saveFavorite(city: {
   description: string;
   icon: string | null;
 }) {
-  const existingCity = await db.city.findUnique({ where: { id: city.id } });
-  if (existingCity) return { message: "Redan i favoriter" };
+  // Check if city already exists by weatherId
+  const exists = await db.city.findFirst({ where: { weatherId: city.id } });
+  if (exists) return;
+  
+  //Usage of fake id
+  const objectId = fakeObjectIdFromWeatherId(city.id);
 
-  const newCity = await db.city.create({
+  await db.city.create({
     data: {
-      id: city.id,
+      id: objectId,
+      weatherId: city.id,
       name: city.name,
       temp: city.temp,
       description: city.description,
@@ -65,5 +89,5 @@ export async function saveFavorite(city: {
     },
   });
 
-  return newCity;
+  revalidatePath("/"); 
 }
