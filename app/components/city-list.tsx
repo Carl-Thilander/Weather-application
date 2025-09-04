@@ -1,10 +1,10 @@
 "use client";
 
 import { City } from "@/generated/prisma";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SearchBar from "./search-bar";
 import WeatherCard from "./weather-card";
-import { useRouter } from "next/navigation";
 
 interface Props {
   defaultCities: City[];

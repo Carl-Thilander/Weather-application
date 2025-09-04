@@ -1,5 +1,4 @@
 import { db } from "@/prisma/db";
-import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -25,6 +24,8 @@ export async function GET(req: Request) {
     icon: weather.icon,
   });
   }
+
+  
 
   export async function POST(req: NextResponse){
     const body = await req.json();
