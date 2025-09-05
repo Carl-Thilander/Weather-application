@@ -1,8 +1,8 @@
 import { db } from "../db";
-import { seedTodos } from "./todo";
+import { seedDefaultCities } from "./city";
 
 async function main() {
-  await seedTodos();
+  await seedDefaultCities();
 }
 
 main()

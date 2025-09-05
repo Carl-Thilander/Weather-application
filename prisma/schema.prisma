@@ -14,7 +14,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Todo {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  text String
+model City {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  weatherId   String
+  name        String
+  temp        Int
+  description String
+  icon        String?
+  favorite    Boolean @default(false)
 }
