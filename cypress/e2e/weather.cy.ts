@@ -11,7 +11,7 @@ describe("weather app", () => {
     });
   
 
-    it("should be possible to search and remove a city from favorites", () => {
+    it("should be possible to search and add a city, then remove a city from favorites", () => {
       cy.visit("/");
       cy.get("[data-cy='Enter-city']").type("Gothenburg");
       cy.get("[data-cy='Search-city']").first().click();
@@ -24,19 +24,8 @@ describe("weather app", () => {
       cy.get("h2").should("not.contain.text", "Gothenburg");
     });
 
-    it("should be possible to add a city to favorites", () => {
+    it("should find and click a weather card in favorites and display forecast", () => {
       cy.visit("/");
-      cy.get("[data-cy='Enter-city']").type("Berlin");
-      cy.get("[data-cy='Search-city']").first().click();
-      cy.get("h1").should("contain.text", "Berlin");
-      cy.get("[data-cy='Add-favorite']").click();
-      cy.get("[data-cy='Add-favorite-toast']").should("be.visible");
-      cy.get("[data-cy='Back-to-home']").click();
-      cy.get("h2").should("contain.text", "Berlin");
-    });
-
-    it("should find and click a weather card and display forecast", () => {
-      cy.visit("/"); 
       cy.contains('a', 'Stockholm').click();
       cy.url().should('include', '/stockholm');
       cy.get('h1').should('contain.text', 'Stockholm');

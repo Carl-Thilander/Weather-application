@@ -16,7 +16,6 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<City[]>([]);
  
-
    useEffect(() => {
     const getSuggestions = async () => {
       if (query.length < 2) return setSuggestions([]);
@@ -27,14 +26,12 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
     return () => clearTimeout(timeout);
   }, [query]);
 
-
     const handleSelect = (city: City) => {
     setQuery(city.name);
     setSuggestions([]);
     onSearch(city.name); 
   };
   
-
   return (
     <div className="relative w-full max-w-md">
       <input
@@ -42,11 +39,11 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search city..."
-        className="w-full border-4 border-white p-2 rounded-full placeholder:text-white"
+        className="w-full border-4 border-white p-2 text-white rounded-full placeholder:text-white"
         data-cy="Enter-city"
       />
       {suggestions.length > 0 && (
-        <ul className="absolute z-10 bg-white border rounded w-full mt-1 max-h-60 overflow-y-auto">
+        <ul className="absolute z-10 bg-white rounded w-full mt-1 max-h-60 overflow-y-auto">
           {suggestions.map((city, idx) => (
             <li
               key={`${city.name}-${idx}`}
