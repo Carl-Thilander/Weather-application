@@ -1,9 +1,9 @@
 "use client";
 
-import { deleteFavorite } from "@/app/actions"; // 👈 ny action
+import { deleteFavorite } from "@/app/actions";
 import Link from "next/link";
 import { useState } from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "./search-bar";
 import WeatherCard from "./weather-card";
 
 interface City {

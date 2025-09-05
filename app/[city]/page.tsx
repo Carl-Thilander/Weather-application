@@ -1,13 +1,22 @@
 import { fetchForecast, fetchWeather } from "@/app/actions";
-import BackToHomeButton from "@/app/components/BacktoHomeBtn";
-import AddFavoriteButton from "../components/AddFavoriteButton";
+import BackToHomeButton from "@/app/components/back-tohome-button";
+import AddFavoriteButton from "../components/add-favorite-button";
 
 interface Props {
   params: { city: string };
 }
 
-function groupForecastByDayAndHour(forecast: any[]) {
-  const days: { [day: string]: { [hour: string]: any } } = {};
+interface ForecastItem {
+  date: Date;
+  icon: string;
+  description: string;
+  temp: number;
+  wind: number;
+  humidity: number;
+}
+
+function groupForecastByDayAndHour(forecast: ForecastItem[]) {
+  const days: { [day: string]: { [hour: string]: ForecastItem } } = {};
   const hoursSet = new Set<string>();
 
   forecast.forEach(item => {
@@ -35,9 +44,9 @@ export default async function CityPage({ params }: Props) {
 
   return (
     <main className="bg-gradient-to-b from-slate-800 to-slate-600 min-h-screen p-8 ">
-      <h1 className="text-3xl font-bold">{weather.name}</h1>
-      <p className="text-xl" data-cy="temperature">{weather.temp}°C</p>
-      <p className="capitalize" data-cy="condition">{weather.description}</p>
+      <h1 className="text-3xl font-bold text-white">{weather.name}</h1>
+      <p className="text-xl text-white" data-cy="temperature">{weather.temp}°C</p>
+      <p className="capitalize  text-white" data-cy="condition">{weather.description}</p>
 
       <AddFavoriteButton city={weather} isFavorite={weather.favorite}  />
       <BackToHomeButton />

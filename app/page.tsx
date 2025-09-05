@@ -1,6 +1,6 @@
 import { db } from "@/prisma/db";
-import CityList from "./components/CityList";
-import ClockWidget from "./components/ClockWidget";
+import CityList from "./components/city-list";
+import ClockWidget from "./components/clock-widget";
 import Header from "./components/header";
 
 export default async function Home() {
