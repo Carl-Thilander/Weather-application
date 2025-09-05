@@ -3,7 +3,7 @@
 import { db } from "@/prisma/db";
 import { revalidatePath } from "next/cache";
 
-//Fetch 5-day forecast for a city
+//Fetch forecast for a city
 export async function fetchForecast(city: string) {
   const apiKey = process.env.WEATHER_API_KEY;
   const res = await fetch(
@@ -11,8 +11,24 @@ export async function fetchForecast(city: string) {
   );
   if (!res.ok) return null;
   const data = await res.json();
+  // Define type for forecast item
+  type ForecastItem = {
+    dt: number;
+    main: {
+      temp: number;
+      humidity: number;
+    };
+    weather: Array<{
+      description: string;
+      icon: string;
+    }>;
+    wind: {
+      speed: number;
+    };
+  };
+
   // Return array of forecasts (every 3 hours)
-  return data.list.map((item: any) => ({
+  return data.list.map((item: ForecastItem) => ({
     dt: item.dt,
     date: new Date(item.dt * 1000),
     temp: Math.round(item.main.temp),
@@ -69,7 +85,13 @@ export async function fetchCities(query: string) {
   if (!res.ok) return [];
 
   const data = await res.json();
-  return data.map((c: any) => ({
+  type CityApiResponse = {
+    name: string;
+    country: string;
+    lat: number;
+    lon: number;
+  };
+  return data.map((c: CityApiResponse) => ({
     name: c.name,
     country: c.country,
     lat: c.lat,

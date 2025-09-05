@@ -28,7 +28,7 @@ function groupForecastByDayAndHour(forecast: ForecastItem[]) {
   });
 
   const hours = Array.from(hoursSet).sort();
-  const dayKeys = Object.keys(days).slice(0, 5); 
+  const dayKeys = Object.keys(days).slice(0, 4); 
 
   return { days, hours, dayKeys };
 }
@@ -53,7 +53,7 @@ export default async function CityPage({ params }: Props) {
 
       <h2 className="mt-8 text-2xl font-semibold text-white">Weather Forecast</h2>
 
- <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 " data-cy="forecast-grid">
+ <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 " data-cy="forecast-grid">
       {dayKeys.map((day) => (
         <div
           key={day}
@@ -71,7 +71,7 @@ export default async function CityPage({ params }: Props) {
               return item ? (
                 <div
                   key={day + hour}
-                  className="flex flex-col items-center justify-center p-3 rounded-xl bg-gradient-to-b from-sky-100 to-sky-300 shadow"
+                  className="flex flex-col items-center justify-center p-3 rounded-xl bg-gradient-to-b from-sky-100 to-sky-300 shadow h-65"
                 >
                   <span className="text-sm font-bold text-slate-700">
                     {hour}
@@ -82,10 +82,10 @@ export default async function CityPage({ params }: Props) {
                     width={48}
                     height={48}
                   />
-                  <span className="text-lg font-bold text-black">{item.temp}°C</span>
-                  <span className="text-lg font-bold text-black">Wind {item.wind} m/s</span>
-                  <span className="text-lg font-bold text-black">Humidity {item.humidity} %</span>
-                  <span className="text-s text-slate-600 capitalize">
+                  <span className="text-lg font-bold text-black mb-2">{item.temp}°C</span>
+                  <span className="text-sm text-black mb-2">Wind {item.wind} m/s</span>
+                  <span className="text-sm text-black mb-2">Humidity {item.humidity} %</span>
+                  <span className="text-sm text-slate-600 capitalize">
                     {item.description}
                   </span>
                 </div>

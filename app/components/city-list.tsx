@@ -34,11 +34,10 @@ export default function CityList({ defaultCities }: Props) {
   return (
      <div className="flex flex-col items-center">
       <SearchBar onSearch={handleSearch} />
-      <h2 className="flex mt-4 ">Favorite list</h2>
+        <h2 className="left-1 mt-8 text-4xl text-white ">Favorite list</h2>
       <div className="flex flex-row gap-4 flex-wrap justify-center mt-6">
         {cities.map((c) => (
           <div key={c.id} className="relative">
-            {/* 👇 Link runt hela WeatherCard */}
             <Link href={`/${c.name.toLowerCase()}`} className="block hover:scale-105 transform transition duration-200">
               <WeatherCard
                 name={c.name}
