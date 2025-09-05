@@ -49,7 +49,7 @@ export default function CityList({ defaultCities }: Props) {
             </Link>
             <button
               onClick={() => handleDelete(c.id)}
-              className="absolute top-2 right-2 bg-gray-300 p-2 rounded-full hover:bg-red-600 transition"
+              className="absolute top-2 right-2 bg-gray-300 p-1 rounded-xl hover:bg-red-600 transition"
               aria-label={`Remove ${c.name} from list`}
             >
               ❌
