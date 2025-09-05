@@ -35,8 +35,7 @@ export default function AddFavoriteButton({ city, isFavorite }: Props) {
         onClick={handleClick}
         disabled={isPending || localFavorite}
         className={`mt-4 bg-blue-500 text-white px-4 py-2 rounded transition ${
-          localFavorite ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600"
-        }`}
+          localFavorite ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600"}`}
         data-cy="Add-favorite"
       >
         {localFavorite
