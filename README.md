@@ -5,6 +5,9 @@
 ## Description
 This is an application that lets the user enter a city in the search field and retrieves weather data from openweather API. The user can add the city to their favorite-list on the homepage, and the city will appear as a card which still is clickable. The user can from the homepage remove the city from their favorite-list as they wish. 
 
+## Preview
+https://weather-application-ebon-zeta.vercel.app/
+
 
 ## Installation:
 Run "npm install" to receive dependencies and packages from node_modules.
